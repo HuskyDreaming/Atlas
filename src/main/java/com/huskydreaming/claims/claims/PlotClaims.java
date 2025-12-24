@@ -1,10 +1,10 @@
 package com.huskydreaming.claims.claims;
 
 import com.huskydreaming.claims.helpers.SpatialGrid;
-import com.huskydreaming.claims.model.claim.PlotClaim;
-import com.huskydreaming.claims.model.position.BlockPosition;
-import com.huskydreaming.claims.model.position.BoundingBox;
-import com.huskydreaming.claims.model.position.ChunkPosition;
+import com.huskydreaming.claims.model.claims.PlotClaim;
+import com.huskydreaming.claims.model.positions.BlockPosition;
+import com.huskydreaming.claims.model.positions.BoundingBox;
+import com.huskydreaming.claims.model.positions.ChunkPosition;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -14,7 +14,7 @@ public final class PlotClaims {
 
     private final UUID worldId;
 
-    private final Map<Long, List<PlotClaim>> plotsByChunk = new ConcurrentHashMap<>();
+    private final Map<Long, List<PlotClaim>> plots = new ConcurrentHashMap<>();
 
     public PlotClaims(UUID worldId) {
         this.worldId = Objects.requireNonNull(worldId, "worldId");
@@ -41,7 +41,7 @@ public final class PlotClaims {
 
         for (ChunkPosition chunkPosition : SpatialGrid.touchedChunks(bounds)) {
             long key = SpatialGrid.chunkKey(chunkPosition);
-            plotsByChunk.computeIfAbsent(key, l -> new CopyOnWriteArrayList<>())
+            plots.computeIfAbsent(key, l -> new CopyOnWriteArrayList<>())
                     .add(plot);
         }
 
@@ -55,12 +55,12 @@ public final class PlotClaims {
 
         for (ChunkPosition chunkPosition : SpatialGrid.touchedChunks(plot.bounds())) {
             long key = SpatialGrid.chunkKey(chunkPosition);
-            List<PlotClaim> list = plotsByChunk.get(key);
+            List<PlotClaim> list = plots.get(key);
             if (list == null) continue;
 
             removed |= list.remove(plot);
             if (list.isEmpty()) {
-                plotsByChunk.remove(key);
+                plots.remove(key);
             }
         }
 
@@ -71,7 +71,7 @@ public final class PlotClaims {
         Objects.requireNonNull(position, "position");
 
         long key = SpatialGrid.chunkKeyFromBlock(position.x(), position.z());
-        List<PlotClaim> candidates = plotsByChunk.get(key);
+        List<PlotClaim> candidates = plots.get(key);
         if (candidates == null || candidates.isEmpty()) {
             return null;
         }
@@ -92,7 +92,7 @@ public final class PlotClaims {
         Set<PlotClaim> out = new HashSet<>();
 
         for (ChunkPosition chunkPosition : SpatialGrid.touchedChunks(bounds)) {
-            List<PlotClaim> list = plotsByChunk.get(SpatialGrid.chunkKey(chunkPosition));
+            List<PlotClaim> list = plots.get(SpatialGrid.chunkKey(chunkPosition));
             if (list != null) {
                 out.addAll(list);
             }
@@ -102,6 +102,6 @@ public final class PlotClaims {
     }
 
     public void clear() {
-        plotsByChunk.clear();
+        plots.clear();
     }
 }

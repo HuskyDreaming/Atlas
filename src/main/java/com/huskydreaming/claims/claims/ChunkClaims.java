@@ -1,10 +1,11 @@
 package com.huskydreaming.claims.claims;
 
-import com.huskydreaming.claims.enumeration.ClaimFlag;
 import com.huskydreaming.claims.helpers.SpatialGrid;
-import com.huskydreaming.claims.model.claim.ChunkClaim;
-import com.huskydreaming.claims.model.position.BlockPosition;
-import com.huskydreaming.claims.model.position.ChunkPosition;
+import com.huskydreaming.claims.model.claims.ChunkClaim;
+import com.huskydreaming.claims.model.flags.ClaimFlag;
+import com.huskydreaming.claims.model.flags.ClaimPermissions;
+import com.huskydreaming.claims.model.positions.BlockPosition;
+import com.huskydreaming.claims.model.positions.ChunkPosition;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,21 +25,21 @@ public final class ChunkClaims {
         return worldId;
     }
 
-    public boolean claim(UUID ownerId, BlockPosition blockPosition, ClaimFlag claimFlag) {
+    public boolean claim(UUID ownerId, BlockPosition blockPosition, ClaimPermissions permissions) {
         Objects.requireNonNull(ownerId, "ownerId");
         Objects.requireNonNull(blockPosition, "blockPosition");
-        Objects.requireNonNull(claimFlag, "claimFlag");
+        Objects.requireNonNull(permissions, "permissions");
 
         ChunkPosition chunkPosition = ChunkPosition.fromBlock(blockPosition);
-        return claim(ownerId, chunkPosition, claimFlag);
+        return claim(ownerId, chunkPosition, permissions);
     }
 
-    public boolean claim(UUID ownerId, ChunkPosition chunkPosition, ClaimFlag claimFlag) {
+    public boolean claim(UUID ownerId, ChunkPosition chunkPosition, ClaimPermissions permissions) {
         Objects.requireNonNull(ownerId, "ownerId");
         Objects.requireNonNull(chunkPosition, "chunkPosition");
-        Objects.requireNonNull(claimFlag, "claimFlag");
+        Objects.requireNonNull(permissions, "permissions");
 
-        ChunkClaim claim = new ChunkClaim(worldId, ownerId, chunkPosition, claimFlag.getBit());
+        ChunkClaim claim = new ChunkClaim(worldId, ownerId, chunkPosition, permissions);
         long key = SpatialGrid.chunkKey(chunkPosition);
 
         ChunkClaim existing = claims.putIfAbsent(key, claim);

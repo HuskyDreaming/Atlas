@@ -1,7 +1,7 @@
-package com.huskydreaming.claims.model.claim;
+package com.huskydreaming.claims.model.claims;
 
-import com.huskydreaming.claims.enumeration.ClaimFlag;
 import com.huskydreaming.claims.enumeration.ClaimType;
+import com.huskydreaming.claims.model.flags.ClaimFlag;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -14,7 +14,7 @@ public sealed interface ResolvedClaim permits ResolvedClaim.Plot, ResolvedClaim.
 
     UUID ownerId();
 
-    boolean can(UUID playerId, ClaimFlag flag);
+    boolean can(UUID playerId, ClaimFlag claimFlag);
 
     record Plot(PlotClaim claim) implements ResolvedClaim {
 

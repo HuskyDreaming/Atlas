@@ -1,4 +1,4 @@
-package com.huskydreaming.claims.model.position;
+package com.huskydreaming.claims.model.positions;
 
 import com.huskydreaming.claims.helpers.SpatialGrid;
 import org.junit.jupiter.api.Test;

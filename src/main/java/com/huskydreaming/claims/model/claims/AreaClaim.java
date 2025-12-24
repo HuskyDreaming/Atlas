@@ -1,8 +1,9 @@
-package com.huskydreaming.claims.model.claim;
+package com.huskydreaming.claims.model.claims;
 
-import com.huskydreaming.claims.enumeration.ClaimFlag;
-import com.huskydreaming.claims.model.position.BlockPosition;
-import com.huskydreaming.claims.model.position.BoundingBox;
+import com.huskydreaming.claims.model.flags.ClaimFlag;
+import com.huskydreaming.claims.model.flags.ClaimPermissions;
+import com.huskydreaming.claims.model.positions.BlockPosition;
+import com.huskydreaming.claims.model.positions.BoundingBox;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -11,7 +12,7 @@ public record AreaClaim(
         UUID worldId,
         UUID ownerId,
         BoundingBox bounds,
-        int flagMask,
+        ClaimPermissions permissions,
         int priority
 ) {
 
@@ -22,8 +23,7 @@ public record AreaClaim(
     }
 
     public boolean allows(ClaimFlag flag) {
-        Objects.requireNonNull(flag, "flag");
-        return (flagMask & flag.getBit()) != 0;
+        return permissions.allows(flag);
     }
 
     public boolean can(UUID playerId, ClaimFlag flag) {

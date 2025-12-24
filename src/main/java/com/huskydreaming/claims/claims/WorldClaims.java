@@ -1,11 +1,11 @@
 package com.huskydreaming.claims.claims;
 
-import com.huskydreaming.claims.enumeration.ClaimFlag;
-import com.huskydreaming.claims.model.claim.AreaClaim;
-import com.huskydreaming.claims.model.claim.ChunkClaim;
-import com.huskydreaming.claims.model.claim.PlotClaim;
-import com.huskydreaming.claims.model.claim.ResolvedClaim;
-import com.huskydreaming.claims.model.position.BlockPosition;
+import com.huskydreaming.claims.model.claims.AreaClaim;
+import com.huskydreaming.claims.model.claims.ChunkClaim;
+import com.huskydreaming.claims.model.claims.PlotClaim;
+import com.huskydreaming.claims.model.claims.ResolvedClaim;
+import com.huskydreaming.claims.model.flags.ClaimFlag;
+import com.huskydreaming.claims.model.positions.BlockPosition;
 
 import java.util.Objects;
 import java.util.Optional;

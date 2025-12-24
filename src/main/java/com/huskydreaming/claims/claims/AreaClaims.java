@@ -1,9 +1,9 @@
 package com.huskydreaming.claims.claims;
 
 import com.huskydreaming.claims.helpers.SpatialGrid;
-import com.huskydreaming.claims.model.claim.AreaClaim;
-import com.huskydreaming.claims.model.position.BlockPosition;
-import com.huskydreaming.claims.model.position.BoundingBox;
+import com.huskydreaming.claims.model.claims.AreaClaim;
+import com.huskydreaming.claims.model.positions.BlockPosition;
+import com.huskydreaming.claims.model.positions.BoundingBox;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -13,8 +13,7 @@ public final class AreaClaims {
 
     private final UUID worldId;
 
-    private final Map<Long, List<AreaClaim>> claimsByCell =
-            new ConcurrentHashMap<>();
+    private final Map<Long, List<AreaClaim>> claims = new ConcurrentHashMap<>();
 
     public AreaClaims(UUID worldId) {
         this.worldId = Objects.requireNonNull(worldId, "worldId");
@@ -35,7 +34,7 @@ public final class AreaClaims {
         }
 
         for (long cellKey : SpatialGrid.touchedCells(bounds)) {
-            claimsByCell.computeIfAbsent(cellKey, l -> new CopyOnWriteArrayList<>())
+            claims.computeIfAbsent(cellKey, l -> new CopyOnWriteArrayList<>())
                     .add(claim);
         }
 
@@ -48,12 +47,12 @@ public final class AreaClaims {
         boolean removed = false;
 
         for (long cellKey : SpatialGrid.touchedCells(claim.bounds())) {
-            List<AreaClaim> list = claimsByCell.get(cellKey);
+            List<AreaClaim> list = claims.get(cellKey);
             if (list == null) continue;
 
             removed |= list.remove(claim);
             if (list.isEmpty()) {
-                claimsByCell.remove(cellKey);
+                claims.remove(cellKey);
             }
         }
 
@@ -64,7 +63,7 @@ public final class AreaClaims {
         Objects.requireNonNull(position, "position");
 
         long cellKey = SpatialGrid.cellKey(position.x(), position.z());
-        List<AreaClaim> candidates = claimsByCell.get(cellKey);
+        List<AreaClaim> candidates = claims.get(cellKey);
         if (candidates == null || candidates.isEmpty()) {
             return null;
         }
@@ -82,7 +81,7 @@ public final class AreaClaims {
     }
 
     public void clear() {
-        claimsByCell.clear();
+        claims.clear();
     }
 
     private Set<AreaClaim> potentialOverlaps(AreaClaim claim) {
@@ -90,7 +89,7 @@ public final class AreaClaims {
 
         BoundingBox bounds = claim.bounds();
         for (long cellKey : SpatialGrid.touchedCells(bounds)) {
-            List<AreaClaim> list = claimsByCell.get(cellKey);
+            List<AreaClaim> list = claims.get(cellKey);
             if (list != null) out.addAll(list);
         }
 

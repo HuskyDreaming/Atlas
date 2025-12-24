@@ -1,8 +1,8 @@
 package com.huskydreaming.claims.helpers;
 
-import com.huskydreaming.claims.model.position.BlockPosition;
-import com.huskydreaming.claims.model.position.BoundingBox;
-import com.huskydreaming.claims.model.position.ChunkPosition;
+import com.huskydreaming.claims.model.positions.BlockPosition;
+import com.huskydreaming.claims.model.positions.BoundingBox;
+import com.huskydreaming.claims.model.positions.ChunkPosition;
 
 import java.util.ArrayList;
 import java.util.List;

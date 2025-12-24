@@ -1,9 +1,9 @@
-package com.huskydreaming.claims.model.claim;
+package com.huskydreaming.claims.model.claims;
 
 import com.huskydreaming.claims.helpers.SpatialGrid;
 import com.huskydreaming.claims.model.helpers.AreaClaimHelper;
-import com.huskydreaming.claims.model.position.BlockPosition;
-import com.huskydreaming.claims.model.position.ChunkPosition;
+import com.huskydreaming.claims.model.positions.BlockPosition;
+import com.huskydreaming.claims.model.positions.ChunkPosition;
 import org.junit.jupiter.api.Test;
 
 import java.util.Random;

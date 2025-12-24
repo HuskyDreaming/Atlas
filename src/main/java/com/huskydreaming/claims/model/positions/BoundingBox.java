@@ -1,4 +1,4 @@
-package com.huskydreaming.claims.model.position;
+package com.huskydreaming.claims.model.positions;
 
 public record BoundingBox(int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
 

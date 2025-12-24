@@ -1,8 +1,8 @@
 package com.huskydreaming.claims.model.helpers;
 
-import com.huskydreaming.claims.model.claim.AreaClaim;
-import com.huskydreaming.claims.model.position.BoundingBox;
-import com.huskydreaming.claims.model.position.ChunkPosition;
+import com.huskydreaming.claims.model.claims.AreaClaim;
+import com.huskydreaming.claims.model.positions.BoundingBox;
+import com.huskydreaming.claims.model.positions.ChunkPosition;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,7 +17,7 @@ public final class AreaClaimHelper {
     public static AreaClaim areaClaim(UUID worldId, int minX, int minY, int minZ, int maxX, int maxY, int maxZ) {
         UUID ownerId = UUID.randomUUID();
         BoundingBox bounds = new BoundingBox(minX, minY, minZ, maxX, maxY, maxZ);
-        return new AreaClaim(worldId, ownerId, bounds, 0, 0);
+        return new AreaClaim(worldId, ownerId, bounds, null, 0);
     }
 
     public static Set<ChunkPosition> toSet(Iterable<ChunkPosition> iterable) {

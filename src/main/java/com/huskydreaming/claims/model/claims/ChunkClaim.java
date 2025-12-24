@@ -1,7 +1,8 @@
-package com.huskydreaming.claims.model.claim;
+package com.huskydreaming.claims.model.claims;
 
-import com.huskydreaming.claims.enumeration.ClaimFlag;
-import com.huskydreaming.claims.model.position.ChunkPosition;
+import com.huskydreaming.claims.model.flags.ClaimFlag;
+import com.huskydreaming.claims.model.flags.ClaimPermissions;
+import com.huskydreaming.claims.model.positions.ChunkPosition;
 
 import java.util.Objects;
 import java.util.UUID;
@@ -10,7 +11,7 @@ public record ChunkClaim(
         UUID worldId,
         UUID ownerId,
         ChunkPosition chunkPosition,
-        int flagMask
+        ClaimPermissions permissions
 ) {
 
     public ChunkClaim {
@@ -19,8 +20,7 @@ public record ChunkClaim(
     }
 
     public boolean allows(ClaimFlag flag) {
-        Objects.requireNonNull(flag, "flag");
-        return (flagMask & flag.getBit()) != 0;
+        return permissions.allows(flag);
     }
 
     public boolean can(UUID playerId, ClaimFlag flag) {
