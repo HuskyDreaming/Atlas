@@ -1,8 +1,8 @@
 # 🗺️ Atlas
 
-![Static Badge](https://img.shields.io/badge/DOWNLOADS-brightgreen?style=for-the-badge&logo=removedotbg&logoColor=white&logoSize=auto)
-![Static Badge](https://img.shields.io/badge/WIKI-brightgreen?style=for-the-badge&logo=gitbook&logoColor=white&logoSize=auto)
-![Static Badge](https://img.shields.io/badge/SUPPORT-brightgreen?style=for-the-badge&logo=reverbnation&logoColor=white&logoSize=auto)
+![Static Badge](https://img.shields.io/badge/DOWNLOADS-5865F2?style=for-the-badge&logo=removedotbg&logoColor=white&logoSize=auto)
+![Static Badge](https://img.shields.io/badge/WIKI-5865F2?style=for-the-badge&logo=gitbook&logoColor=white&logoSize=auto)
+![Static Badge](https://img.shields.io/badge/SUPPORT-5865F2?style=for-the-badge&logo=reverbnation&logoColor=white&logoSize=auto)
 
 Atlas is a work in progress land claiming system for Hytale servers, built with a strong focus on correctness, performance, and long term maintainability.
 
