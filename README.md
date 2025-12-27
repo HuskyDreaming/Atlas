@@ -1,4 +1,4 @@
-# 🗺️ Atlas
+# 🗺️ Atlas | Hytale Land Claiming Plugin
 
 ![Static Badge](https://img.shields.io/badge/DOWNLOADS-4d946c?style=for-the-badge&logo=removedotbg&logoColor=white&logoSize=auto)
 ![Static Badge](https://img.shields.io/badge/WIKI-4d946c?style=for-the-badge&logo=gitbook&logoColor=white&logoSize=auto)
